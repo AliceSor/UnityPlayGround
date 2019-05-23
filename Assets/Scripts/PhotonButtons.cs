@@ -12,28 +12,13 @@ public class PhotonButtons : MonoBehaviour
 
     public void OnClickJoinRoom()
     {
-        RoomOptions roomOptions;
-
-        if (joinRoomInput.text.Length > 0)
-        {
-            roomOptions = new RoomOptions();
-            roomOptions.MaxPlayers = 4;
-
-            PhotonNetwork.JoinOrCreateRoom(joinRoomInput.text, roomOptions, TypedLobby.Default);
-        }
+        pHandler.JoinRoom(joinRoomInput.text);
     }
 
     public void OnClickCreateRoom()
     {
-        if (createRoomInput.text.Length > 0)
-            PhotonNetwork.CreateRoom(createRoomInput.text, new RoomOptions() { MaxPlayers = 4 }, null);
+        pHandler.CreateNewRoom(createRoomInput.text);
     }
 
-    private void OnJoinedRoom()
-    {
-        Debug.Log("We are joined room!");
-
-        //SceneManager.LoadScene(1);
-        pHandler.GoToGameScene();
-    }
+    
 }
