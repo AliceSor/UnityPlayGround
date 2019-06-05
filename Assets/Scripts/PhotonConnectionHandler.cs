@@ -18,24 +18,18 @@ public class PhotonConnectionHandler : MonoBehaviourPunCallbacks
 
     public override void OnConnectedToMaster()
     {
-
         Debug.Log("We are connected to photon master");
+        PhotonNetwork.JoinLobby();
+    }
+
+    public override void OnJoinedLobby()
+    {
+        Debug.Log("Joined lobby");
     }
 
     public override void OnDisconnected(DisconnectCause cause)
     {
         Debug.Log("Dis from photon services" + cause.ToString());
-    }
-
-    private void CreateRoom(string roomName)
-    {
-        RoomOptions roomOptions;
-
-        roomOptions = new RoomOptions();
-        roomOptions.IsVisible = true;
-        roomOptions.IsOpen = true;
-        roomOptions.MaxPlayers = 10;
-        PhotonNetwork.CreateRoom(roomName, roomOptions);
     }
 
 }
