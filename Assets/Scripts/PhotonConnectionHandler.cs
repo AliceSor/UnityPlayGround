@@ -1,64 +1,41 @@
-﻿using System.Collections;
+﻿using Photon.Pun;
+using Photon.Realtime;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
-public class PhotonConnectionHandler : MonoBehaviour
+public class PhotonConnectionHandler : MonoBehaviourPunCallbacks
 {
-    public GameObject mainPlayer;
+    public void OnPhotonInstantiate(PhotonMessageInfo info)
+    {
+        throw new System.NotImplementedException();
+    }
 
     private void Awake()
     {
-        DontDestroyOnLoad(this.transform);
-        SceneManager.sceneLoaded += OnSceneFinishedLoading;
+        PhotonNetwork.ConnectUsingSettings();
     }
 
-
-    public void GoToGameScene()
+    public override void OnConnectedToMaster()
     {
-        Debug.Log("GoToGameScene");
-        PhotonNetwork.LoadLevel("GameScene");
+
+        Debug.Log("We are connected to photon master");
     }
 
-    public void CreateNewRoom(string roomName)
+    public override void OnDisconnected(DisconnectCause cause)
     {
-        if (roomName.Length > 0)
-            PhotonNetwork.CreateRoom(roomName, new RoomOptions() { MaxPlayers = 4 }, null);
+        Debug.Log("Dis from photon services" + cause.ToString());
     }
 
-    public void JoinRoom(string roomName)
+    private void CreateRoom(string roomName)
     {
         RoomOptions roomOptions;
 
-        if (roomName.Length > 0)
-        {
-            roomOptions = new RoomOptions();
-            roomOptions.MaxPlayers = 4;
-
-            PhotonNetwork.JoinOrCreateRoom(roomName, roomOptions, TypedLobby.Default);
-        }
+        roomOptions = new RoomOptions();
+        roomOptions.IsVisible = true;
+        roomOptions.IsOpen = true;
+        roomOptions.MaxPlayers = 10;
+        PhotonNetwork.CreateRoom(roomName, roomOptions);
     }
 
-    private void OnJoinedRoom()
-    {
-        Debug.Log("We are joined room!");
-
-        //SceneManager.LoadScene(1);
-        GoToGameScene();
-    }
-
-    public void OnSceneFinishedLoading(Scene scene, LoadSceneMode mode)
-    {
-        Debug.Log("OnSceneFinishedLoading");
-        if (scene.name == "GameScene")
-        {
-            SpawnPlayer();
-        }
-    }
-
-    private void SpawnPlayer()
-    {
-        Debug.Log("SpawnPlayer " + mainPlayer.name);
-        PhotonNetwork.Instantiate(mainPlayer.name, mainPlayer.transform.position, mainPlayer.transform.rotation, 0);
-    }
 }
