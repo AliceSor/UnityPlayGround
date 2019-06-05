@@ -7,9 +7,15 @@ using TMPro;
 
 public class RoomsHolderPanel : MonoBehaviourPunCallbacks
 {
+    [SerializeField] GameObject roomButtonPrefab;
+
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
     {
-        Debug.Log("List updated");
+        Debug.Log("List updated " + roomList.Count);
+        if (roomList.Count > 0)
+        {
+            Debug.Log(roomList[0].Name);
+        }
     }
 
     public void CreateRoom(TextMeshProUGUI textField)

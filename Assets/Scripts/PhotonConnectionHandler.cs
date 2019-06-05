@@ -13,13 +13,19 @@ public class PhotonConnectionHandler : MonoBehaviourPunCallbacks
 
     private void Awake()
     {
+        PhotonNetwork.AutomaticallySyncScene = true;
         PhotonNetwork.ConnectUsingSettings();
     }
 
     public override void OnConnectedToMaster()
     {
         Debug.Log("We are connected to photon master");
-        PhotonNetwork.JoinLobby();
+       // PhotonNetwork.JoinLobby();
+    }
+
+    public override void OnCreateRoomFailed(short returnCode, string message)
+    {
+        Debug.Log(message);
     }
 
     public override void OnJoinedLobby()
@@ -30,6 +36,11 @@ public class PhotonConnectionHandler : MonoBehaviourPunCallbacks
     public override void OnDisconnected(DisconnectCause cause)
     {
         Debug.Log("Dis from photon services" + cause.ToString());
+    }
+
+    public override void OnJoinedRoom()
+    {
+        Debug.Log("Joined room");
     }
 
 }

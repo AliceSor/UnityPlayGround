@@ -10,12 +10,6 @@ public class RoomButton : MonoBehaviour
 
     public void JoinRoom()
     {
-        RoomOptions roomOptions;
-
-        roomOptions = new RoomOptions();
-        roomOptions.IsVisible = true;
-        roomOptions.IsOpen = true;
-        roomOptions.MaxPlayers = 10;
-        PhotonNetwork.CreateRoom(roomName, roomOptions);
+        PhotonNetwork.JoinRoom(roomName);
     }
 }
