@@ -20,7 +20,7 @@ public class PhotonConnectionHandler : MonoBehaviourPunCallbacks
     public override void OnConnectedToMaster()
     {
         Debug.Log("We are connected to photon master");
-       // PhotonNetwork.JoinLobby();
+        PhotonNetwork.JoinLobby();
     }
 
     public override void OnCreateRoomFailed(short returnCode, string message)
@@ -41,6 +41,14 @@ public class PhotonConnectionHandler : MonoBehaviourPunCallbacks
     public override void OnJoinedRoom()
     {
         Debug.Log("Joined room");
+    }
+
+    public void JoinLobbyOnClick()
+    {
+        if (!PhotonNetwork.InLobby)
+        {
+            PhotonNetwork.JoinLobby();
+        }
     }
 
 }

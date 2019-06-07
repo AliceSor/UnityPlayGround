@@ -5,11 +5,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class RoomsHolderPanel : MonoBehaviourPunCallbacks
+public class RoomsMenu : MonoBehaviourPunCallbacks, ILobbyCallbacks
 {
-    [SerializeField] GameObject roomButtonPrefab;
-
-    public override void OnRoomListUpdate(List<RoomInfo> roomList)
+	public override void OnRoomListUpdate(List<RoomInfo> roomList)
     {
         Debug.Log("List updated " + roomList.Count);
         if (roomList.Count > 0)
@@ -18,7 +16,7 @@ public class RoomsHolderPanel : MonoBehaviourPunCallbacks
         }
     }
 
-    public void CreateRoom(TextMeshProUGUI textField)
+	public void CreateRoom(TextMeshProUGUI textField)
     {
         RoomOptions roomOptions;
 
@@ -31,4 +29,4 @@ public class RoomsHolderPanel : MonoBehaviourPunCallbacks
         Debug.Log("Attemp to create room " + textField.text);
     }
 
-}
+}//RoomsMenu
