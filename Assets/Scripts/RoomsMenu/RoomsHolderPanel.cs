@@ -6,7 +6,6 @@ using UnityEngine;
 
 public class RoomsHolderPanel : MonoBehaviour
 {
-    [SerializeField] GameObject roomButtonPrefab;
     [SerializeField] Transform holderPanel;
     [SerializeField] RoomButtonPool pool;
 
@@ -18,16 +17,18 @@ public class RoomsHolderPanel : MonoBehaviour
             RoomButton rb = pool.Get();
             rb.transform.SetParent(holderPanel);
             rb.SetData(i.Name, i.PlayerCount.ToString());
+            rb.gameObject.SetActive(true);
         }
     }
 
     private void HideAll()
     {
         RoomButton[] roomButtons = holderPanel.GetComponentsInChildren<RoomButton>();
-        for (int i = roomButtons.Length; i >= 0; i--)
-        {
-            pool.ReturnObject(roomButtons[i]);
-        }
+        if (roomButtons.Length > 0)
+            for (int i = roomButtons.Length - 1; i >= 0; i--)
+            {
+                pool.ReturnObject(roomButtons[i]);
+            }
     }
 
 }

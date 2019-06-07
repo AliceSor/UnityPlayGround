@@ -3,9 +3,12 @@ using Photon.Realtime;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PhotonConnectionHandler : MonoBehaviourPunCallbacks
 {
+    public UnityEvent connectedToPhotonEvent;
+
     public void OnPhotonInstantiate(PhotonMessageInfo info)
     {
         throw new System.NotImplementedException();
@@ -20,7 +23,9 @@ public class PhotonConnectionHandler : MonoBehaviourPunCallbacks
     public override void OnConnectedToMaster()
     {
         Debug.Log("We are connected to photon master");
-        PhotonNetwork.JoinLobby();
+        if (connectedToPhotonEvent != null)
+            connectedToPhotonEvent.Invoke();
+       // PhotonNetwork.JoinLobby();
     }
 
     public override void OnCreateRoomFailed(short returnCode, string message)
@@ -43,12 +48,6 @@ public class PhotonConnectionHandler : MonoBehaviourPunCallbacks
         Debug.Log("Joined room");
     }
 
-    public void JoinLobbyOnClick()
-    {
-        if (!PhotonNetwork.InLobby)
-        {
-            PhotonNetwork.JoinLobby();
-        }
-    }
+
 
 }
