@@ -36,6 +36,8 @@ public class RoomsMenu : MonoBehaviourPunCallbacks, ILobbyCallbacks
     {
         if (enteredRoomEvent != null)
             enteredRoomEvent.Invoke();
+        PhotonNetwork.NickName = "Alice";
+        Debug.Log(PhotonNetwork.PlayerList[0].NickName);
     }
 
     public void JoinLobbyOnClick()

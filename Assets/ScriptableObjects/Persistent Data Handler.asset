@@ -8,6 +8,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e42d395bd882ed64082db329515f8aa5, type: 3}
-  m_Name: ConnectedTpPhoton
+  m_Script: {fileID: 11500000, guid: bfdf5a6bf9489c84fad4d0e94d4baaf3, type: 3}
+  m_Name: Persistent Data Handler
   m_EditorClassIdentifier: 
+  filename: PersistentData
+  persistentData:
+    ApplicationFirstLoad: 1
+    fullscreen: 0
+    soundVolume: 0
+    musicVolume: 0
+    userName: 
