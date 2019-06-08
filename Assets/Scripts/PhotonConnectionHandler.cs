@@ -9,6 +9,8 @@ public class PhotonConnectionHandler : MonoBehaviourPunCallbacks
 {
     public UnityEvent connectedToPhotonEvent;
 
+    [SerializeField] ModelSO model;
+
     public void OnPhotonInstantiate(PhotonMessageInfo info)
     {
         throw new System.NotImplementedException();
@@ -22,6 +24,8 @@ public class PhotonConnectionHandler : MonoBehaviourPunCallbacks
 
     public override void OnConnectedToMaster()
     {
+        if (model != null)
+            PhotonNetwork.NickName = model.playerSO.playerName;
         Debug.Log("We are connected to photon master");
         if (connectedToPhotonEvent != null)
             connectedToPhotonEvent.Invoke();

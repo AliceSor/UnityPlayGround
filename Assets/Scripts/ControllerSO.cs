@@ -22,7 +22,7 @@ public class ControllerSO : ScriptableObject
 
     public void SetPlayerName(string newName)
     {
-        model.playerSO.name = newName;
+        model.playerSO.playerName = newName;
 #if PERSISTENT_DATA_HANDLER
         persistentDataHandler.persistentData.userName = newName;
 #endif

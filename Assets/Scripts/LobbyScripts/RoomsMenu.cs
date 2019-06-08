@@ -9,6 +9,7 @@ using TMPro;
 public class RoomsMenu : MonoBehaviourPunCallbacks, ILobbyCallbacks
 {
     [SerializeField] RoomsHolderPanel roomsHolderPanel;
+    [SerializeField] PlayerListHolder playerListHolder;
     public UnityEvent enteredRoomEvent;
 
 
@@ -19,7 +20,19 @@ public class RoomsMenu : MonoBehaviourPunCallbacks, ILobbyCallbacks
             roomsHolderPanel.UpdateRooms(roomList);
     }
 
-	public void CreateRoom(TextMeshProUGUI textField)
+    public override void OnPlayerEnteredRoom(Player newPlayer)
+    {
+        if (playerListHolder != null)
+            playerListHolder.UpdatePlayerList(PhotonNetwork.PlayerList);
+    }
+
+    public override void OnPlayerLeftRoom(Player otherPlayer)
+    {
+        if (playerListHolder != null)
+            playerListHolder.UpdatePlayerList(PhotonNetwork.PlayerList);
+    }
+
+    public void CreateRoom(TextMeshProUGUI textField)
     {
         RoomOptions roomOptions;
 
@@ -36,8 +49,10 @@ public class RoomsMenu : MonoBehaviourPunCallbacks, ILobbyCallbacks
     {
         if (enteredRoomEvent != null)
             enteredRoomEvent.Invoke();
-        PhotonNetwork.NickName = "Alice";
+        
         Debug.Log(PhotonNetwork.PlayerList[0].NickName);
+        if (playerListHolder != null)
+            playerListHolder.UpdatePlayerList(PhotonNetwork.PlayerList);
     }
 
     public void JoinLobbyOnClick()
