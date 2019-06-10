@@ -10,9 +10,23 @@ public class ButtonStart : MonoBehaviour {
     {
 		if (!PhotonNetwork.IsMasterClient)
         {
-            gameObject.SetActive(false);
+          //  gameObject.SetActive(false);
         }
 	}
+
+    public void Test(object obj)
+    {
+        if (obj is Player)
+        {
+            Player player = (Player) obj;
+            Debug.Log(player.NickName);
+        }
+        else
+        {
+            Debug.Log("Wrong type");
+        }
+        
+    }
 	
 
 }

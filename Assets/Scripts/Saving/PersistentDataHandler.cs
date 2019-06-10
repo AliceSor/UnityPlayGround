@@ -6,7 +6,7 @@ using UnityEngine.UI;
 using UnityEngine.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
-
+using System;
 
 [CreateAssetMenu()]
 public class PersistentDataHandler : ScriptableObject
@@ -25,7 +25,7 @@ public class PersistentDataHandler : ScriptableObject
             LoadProgres();
             firstLoad = false;
         }
-
+        Application.quitting += SaveProgres;
     }
 
     void OnDestroy()
@@ -37,20 +37,35 @@ public class PersistentDataHandler : ScriptableObject
 
     public void SaveProgres()
     {
-        BinaryFormatter bf = new BinaryFormatter();
-        FileStream file = File.Create(Application.persistentDataPath + filename);
-        bf.Serialize(file, persistentData);
-        file.Close();
+        Debug.Log("Saving progress");
+        try
+        {
+            BinaryFormatter bf = new BinaryFormatter();
+            FileStream file = File.Create(Application.persistentDataPath + filename);
+            bf.Serialize(file, persistentData);
+            file.Close();
+        }
+        catch (Exception e)
+        {
+             Debug.LogException(e, this);
+        }
     }
 
     public void LoadProgres()
     {
         if (File.Exists(Application.persistentDataPath + filename))
         {
-            BinaryFormatter bf = new BinaryFormatter();
-            FileStream file = File.Open(Application.persistentDataPath + filename, FileMode.Open);
-            persistentData = (PersistentData)bf.Deserialize(file);
-            file.Close();
+            try
+            {
+                BinaryFormatter bf = new BinaryFormatter();
+                FileStream file = File.Open(Application.persistentDataPath + filename, FileMode.Open);
+                persistentData = (PersistentData)bf.Deserialize(file);
+                file.Close();
+            }
+            catch (Exception e)
+            {
+                Debug.LogException(e, this);
+            }
         }
         else
         {
@@ -62,11 +77,16 @@ public class PersistentDataHandler : ScriptableObject
     {
         if (File.Exists(Application.persistentDataPath + filename))
         {
-            File.Delete(Application.persistentDataPath + filename);
-            persistentData = new PersistentData();
+            try
+            {
+                File.Delete(Application.persistentDataPath + filename);
+                persistentData = new PersistentData();
+            }
+            catch (Exception e)
+            {
+                Debug.LogException(e, this);
+            }
         }
     }
-
-    //Todo: move elsewhere
    
 }//PersistensDataHandler

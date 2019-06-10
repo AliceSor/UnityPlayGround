@@ -50,7 +50,7 @@ public class RoomsMenu : MonoBehaviourPunCallbacks, ILobbyCallbacks
         if (enteredRoomEvent != null)
             enteredRoomEvent.Invoke();
         
-        Debug.Log(PhotonNetwork.PlayerList[0].NickName);
+//        Debug.Log(PhotonNetwork.PlayerList[0].NickName);
         if (playerListHolder != null)
             playerListHolder.UpdatePlayerList(PhotonNetwork.PlayerList);
     }

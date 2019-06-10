@@ -8,6 +8,7 @@ using UnityEngine.Events;
 public class PhotonConnectionHandler : MonoBehaviourPunCallbacks
 {
     public UnityEvent connectedToPhotonEvent;
+    public UnityEventTObj onMasterClientSwitched;
 
     [SerializeField] ModelSO model;
 
@@ -52,6 +53,10 @@ public class PhotonConnectionHandler : MonoBehaviourPunCallbacks
         Debug.Log("Joined room");
     }
 
-
+    public override void OnMasterClientSwitched(Player newMasterClient)
+    {
+        if (onMasterClientSwitched != null)
+            onMasterClientSwitched.Invoke(new GameObject());
+    }
 
 }
