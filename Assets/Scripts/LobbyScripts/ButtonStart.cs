@@ -4,28 +4,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ButtonStart : MonoBehaviour {
-
-	void Start ()
+public class ButtonStart : MonoBehaviour
+{
+    public GameObject button;
+	public void OnEnterRoom ()
     {
 		if (!PhotonNetwork.IsMasterClient)
         {
-          //  gameObject.SetActive(false);
+            if (button != null)
+                button.SetActive(false);
+            Debug.Log("Not master client");
         }
 	}
 
-    public void Test(object obj)
+    public void OnMasterClientChanged(object obj)
     {
-        if (obj is Player)
-        {
-            Player player = (Player) obj;
-            Debug.Log(player.NickName);
-        }
-        else
-        {
-            Debug.Log("Wrong type");
-        }
-        
+        Debug.Log("MasterClient Changed");
+        if (button != null)
+            button.SetActive(PhotonNetwork.IsMasterClient);
     }
 	
 

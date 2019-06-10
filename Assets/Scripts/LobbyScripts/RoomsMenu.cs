@@ -11,7 +11,7 @@ public class RoomsMenu : MonoBehaviourPunCallbacks, ILobbyCallbacks
     [SerializeField] RoomsHolderPanel roomsHolderPanel;
     [SerializeField] PlayerListHolder playerListHolder;
     public UnityEvent enteredRoomEvent;
-
+    public UnityEvent leftRoomEvent;
 
 	public override void OnRoomListUpdate(List<RoomInfo> roomList)
     {
@@ -43,6 +43,12 @@ public class RoomsMenu : MonoBehaviourPunCallbacks, ILobbyCallbacks
         PhotonNetwork.CreateRoom(textField.text, roomOptions);
 
         Debug.Log("Attemp to create room " + textField.text);
+    }
+
+    public override void OnLeftRoom()
+    {
+        if (leftRoomEvent != null)
+            leftRoomEvent.Invoke();
     }
 
     public override void OnJoinedRoom()

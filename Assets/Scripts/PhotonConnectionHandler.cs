@@ -23,6 +23,11 @@ public class PhotonConnectionHandler : MonoBehaviourPunCallbacks
         //PhotonNetwork.ConnectUsingSettings();
     }
 
+    public void LeaveRoom()
+    {
+        PhotonNetwork.LeaveRoom();
+    }
+
     public override void OnConnectedToMaster()
     {
         if (model != null)
