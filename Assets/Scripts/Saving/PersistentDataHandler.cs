@@ -14,17 +14,15 @@ public class PersistentDataHandler : ScriptableObject
     public string filename = "PersistentData";
     public PersistentData persistentData;
 
+    public bool isFirstApplicationLauch = true;
+
     //In case sript will be enabled when changing scene
     private bool firstLoad = true;
 
     void OnEnable()
     {
         Debug.Log("PersistentDataHandler Enabled");
-        if (firstLoad)
-        {
-            LoadProgres();
-            firstLoad = false;
-        }
+        LoadProgres();
         Application.quitting += SaveProgres;
     }
 
@@ -44,6 +42,7 @@ public class PersistentDataHandler : ScriptableObject
             FileStream file = File.Create(Application.persistentDataPath + filename);
             bf.Serialize(file, persistentData);
             file.Close();
+            Debug.Log("Progress saved");
         }
         catch (Exception e)
         {
@@ -61,6 +60,8 @@ public class PersistentDataHandler : ScriptableObject
                 FileStream file = File.Open(Application.persistentDataPath + filename, FileMode.Open);
                 persistentData = (PersistentData)bf.Deserialize(file);
                 file.Close();
+                isFirstApplicationLauch = false;
+                Debug.Log("Found progress file");
             }
             catch (Exception e)
             {
