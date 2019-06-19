@@ -28,9 +28,14 @@ public class ControllerSO : ScriptableObject
 #endif
     }
 
-    public void LoadSceneByIndex(int index)
+    public void LoadScene(int index)
     {
         SceneManager.LoadScene(index);
+    }
+
+    public void LoadScenePhoton(int index)
+    {
+        PhotonNetwork.LoadLevel(index);
     }
 
 public void CloseApp()
