@@ -1,6 +1,8 @@
 using System;
 using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
+using Photon.Pun;
+using Photon.Realtime;
 
 namespace UnityStandardAssets.Vehicles.Car
 {
@@ -12,6 +14,9 @@ namespace UnityStandardAssets.Vehicles.Car
 
         private void Awake()
         {
+            PhotonView pv = GetComponent<PhotonView>();
+            if (!pv.IsMine)
+                Destroy(this);
             // get the car controller
             m_Car = GetComponent<CarController>();
         }

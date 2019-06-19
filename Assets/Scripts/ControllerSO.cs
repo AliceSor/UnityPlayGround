@@ -15,6 +15,8 @@ public class ControllerSO : ScriptableObject
     public PersistentDataHandler persistentDataHandler;
 #endif
 
+    public UnityEventTObj playerGOcreatedEvent;
+
     public void ConnectToPhoton()
     {
         PhotonNetwork.ConnectUsingSettings();
@@ -23,9 +25,18 @@ public class ControllerSO : ScriptableObject
     public void SetPlayerName(string newName)
     {
         model.playerSO.playerName = newName;
+        PhotonNetwork.NickName = newName;
 #if PERSISTENT_DATA_HANDLER
         persistentDataHandler.persistentData.userName = newName;
 #endif
+    }
+
+    public void InstantiatePlayer(int pointIndex)
+    {
+        if (model.spawnPoints.Length <= 0 || model.spawnPoints.Length <= pointIndex)
+            return;
+        model.player = PhotonNetwork.Instantiate(model.playerPrefab.name, model.spawnPoints[pointIndex].position, model.spawnPoints[pointIndex].rotation);
+        playerGOcreatedEvent.Invoke(model.player);
     }
 
     public void LoadScene(int index)

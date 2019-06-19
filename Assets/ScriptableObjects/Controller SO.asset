@@ -14,3 +14,19 @@ MonoBehaviour:
   model: {fileID: 11400000, guid: 9805bc52fb1765f4fb85560ae81a26ad, type: 2}
   persistentDataHandler: {fileID: 11400000, guid: 6439e39fc80314f43bbd33229e6d5f26,
     type: 2}
+  playerGOcreatedEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 493b6b5d898521844851f144b5ee43a4, type: 2}
+        m_MethodName: Invoke
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEventTObj, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
