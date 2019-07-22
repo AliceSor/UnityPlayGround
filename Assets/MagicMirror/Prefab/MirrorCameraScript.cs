@@ -173,7 +173,7 @@ public class MirrorCameraScript : MonoBehaviour
 					}
 				}
 
-				worldToCameraMatrix *= reflectionMatrix;
+				//worldToCameraMatrix *= reflectionMatrix;
 				cameraObject.worldToCameraMatrix = worldToCameraMatrix;
 
                	// Clip out background
