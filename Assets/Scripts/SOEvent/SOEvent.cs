@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace SOEvent
 {
-    [CreateAssetMenu()]
+    [CreateAssetMenu(fileName = "SOEvent", menuName = "Custom/SOEvent/SOEvent")]
     public class SOEvent : ScriptableObject
     {
         private List<SOEventListener> listeners = new List<SOEventListener>();

@@ -8,7 +8,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 using System;
 
-[CreateAssetMenu()]
+[CreateAssetMenu(fileName = "PersistentDataHandler", menuName = "Custom/Saving/PersistentDataHandler")]
 public class PersistentDataHandler : ScriptableObject
 {
     public string filename = "PersistentData";
