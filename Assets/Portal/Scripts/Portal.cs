@@ -25,7 +25,7 @@ namespace Portal
             _teleporter = GetComponent<PortalTeleporter>();
         }
 
-        //Wake the f*** Up Samurai, we have a city to burn.
+        //Wake the f*** Up Samurai, we have a city to burn (c)
         public void WakeUp() 
         {
             //wake up 

@@ -24,11 +24,13 @@ namespace Portal
                 Debug.LogError("Missing variables");
                 Destroy(gameObject);
             }
+            cam.enabled = false;
+            renderPlane.gameObject.SetActive(false);
         }
 
         private void OnEnable()
         {
-            //..
+            //...
         }
 
         private void OnDisable()
@@ -36,13 +38,13 @@ namespace Portal
             FreeResources();
             //hide render plane
             //disable cam
+            cam.enabled = false;
+            renderPlane.gameObject.SetActive(false);
         }
 
-        // Update is called once per frame
         void Update()
         {
             MoveCamera();
-            
         }
         #endregion
 
@@ -79,13 +81,17 @@ namespace Portal
             //set other portal
             otherPortal = secondPortal.transform;
             //show render plane
+            renderPlane.gameObject.SetActive(true);
             //enable cam
-
+            cam.enabled = true;
         }
 
         public void FreeResources()
         {
             //return render texture and material
+            helper.ReturnRenderTexture(cam.targetTexture);
+            helper.ReturnMaterial(renderPlane.sharedMaterial);
+            renderPlane.sharedMaterial = null;
         }
     }
 }
