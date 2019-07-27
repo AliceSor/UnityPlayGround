@@ -25,7 +25,8 @@ namespace Portal
             }
             _camera = GetComponent<PortalCamera>();
             _teleporter = GetComponent<PortalTeleporter>();
-            Sleep();
+            //Sleep();
+            WakeUp();
         }
 
         //Wake the f*** Up Samurai, we have a city to burn (c)

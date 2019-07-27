@@ -12,7 +12,7 @@ namespace Portal
         public PortalHelper helper;
 
         private Camera cam;
-        private Transform player;
+        private Transform playerCamera;
         private Transform otherPortal;
 
         #region Unity Callback
@@ -51,15 +51,18 @@ namespace Portal
         private void MoveCamera()
         {
             //set camera position
-            Vector3 playerOffsetFromPortal = player.position - transform.position;
+            Vector3 playerOffsetFromPortal = playerCamera.position - transform.position;
             cam.transform.position = otherPortal.position + playerOffsetFromPortal;
 
             //set camera rotation
+            cam.transform.rotation = playerCamera.rotation;
+
             float angularDifferenceBetweenPortalRotations = Quaternion.Angle(transform.rotation, otherPortal.rotation);
             angularDifferenceBetweenPortalRotations -= 180;
 
             Quaternion portalRotationalDifference = Quaternion.AngleAxis(angularDifferenceBetweenPortalRotations, Vector3.up);
-            Vector3 newCameraDirection = portalRotationalDifference * player.forward;
+            Vector3 newCameraDirection = portalRotationalDifference * playerCamera.forward;
+           // Debug.Log("player forward " + player.forward);
             cam.transform.rotation = Quaternion.LookRotation(newCameraDirection, Vector3.up);
         }
 
@@ -79,7 +82,7 @@ namespace Portal
             renderPlane.sharedMaterial = mat;
 
             //set player
-            player = helper.player;
+            playerCamera = helper.cameraPlayer;
             //set other portal
             otherPortal = secondPortal.transform;
             //show render plane

@@ -7,10 +7,15 @@ namespace Portal
     public class RegisterToPortal : MonoBehaviour
     {
         public PortalHelper helper;
+        public enum PlayerPart {PLAYER, PLAYER_CAMERA}
+        public PlayerPart playerPart;
 
         private void OnEnable()
         {
-            helper.player = transform;
+            if (playerPart == PlayerPart.PLAYER)
+                helper.player = transform;
+            else
+                helper.cameraPlayer = transform;
         }
 
         private void OnDisable()

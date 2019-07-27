@@ -10,6 +10,7 @@ namespace Portal
     {
         public Material originMaterial;
         [HideInInspector]public Transform player;
+        [HideInInspector]public Transform cameraPlayer;
 
         private Stack<Material> _materialsPool;
         private Stack<RenderTexture> _renderTexturePool;
