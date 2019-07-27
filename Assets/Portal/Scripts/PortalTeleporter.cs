@@ -14,8 +14,9 @@ namespace Portal
         private Transform _reciever; //front plane of second portal
         private Transform _sender; //our front plane that teleport player
         private bool playerIsOverlapping = false;
-        private bool _skipNextTrigger = false; //when going from portal from another side it don't teleport
+        [SerializeField]private bool _skipNextTrigger = false; //when going from portal from another side it don't teleport
         private Coroutine _skipCooldownCorotine;
+        private Portal _secondPortal;
 
         void Update()
         {
@@ -40,11 +41,17 @@ namespace Portal
             //}
         }
 
+        private void OnDisable()
+        {
+           // _skipNextTrigger = false;
+        }
+
         public void SetUp(Portal secondPortal)
         {
             _player = GetComponent<PortalCamera>().helper.player;
             _reciever = secondPortal.teleportPlane;
             _sender = GetComponent<Portal>().teleportPlane;
+            _secondPortal = secondPortal;
         }
 
         public void FrontPlaneTriggered()
@@ -91,6 +98,8 @@ namespace Portal
 
             Vector3 positionOffset = Quaternion.Euler(0f, rotationDiff, 0f) * portalToPlayer;
             _player.position = _reciever.position + positionOffset;
+            _secondPortal.GetComponent<PortalTeleporter>().BackPlaneTriggered();
+
 
             //        playerIsOverlapping = false;
         }

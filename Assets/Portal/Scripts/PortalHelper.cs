@@ -9,6 +9,7 @@ namespace Portal
     public class PortalHelper : ScriptableObject
     {
         public Material originMaterial;
+        public List<PortalConnection> connections;
         [HideInInspector]public Transform player;
         [HideInInspector]public Transform cameraPlayer;
 
@@ -19,9 +20,47 @@ namespace Portal
         {
             _materialsPool = new Stack<Material>();
             _renderTexturePool = new Stack<RenderTexture>();
+            connections = new List<PortalConnection>();
             SceneManager.activeSceneChanged += ClearPools;
         }
+        #region Registartion
 
+        /// <summary>
+        /// Add portal to list of portal pairs.
+        /// Return false if slot of portal already occupied
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="newPortal"></param>
+        /// <returns></returns>
+        public bool RegisterPortal(string id, Portal newPortal)
+        {
+            foreach (PortalConnection i in connections)
+            {
+                if (i.id == id)
+                {
+                    return (i.Register(newPortal));
+                }
+            }
+            PortalConnection con = new PortalConnection(id);
+            connections.Add(con);
+            return con.Register(newPortal);
+        }
+
+        public Portal GetSecondPortal(Portal portal)
+        {
+            foreach (PortalConnection i in connections)
+            {
+                if (i.id == portal.id)
+                {
+                    return (portal.type == PortalType.A ? i.portalB : i.portalA);
+                }
+            }
+            return null;
+        }
+
+        #endregion
+
+        #region Pool
         public Material GetMaterial()
         {
             if (_materialsPool.Count < 1)
@@ -74,6 +113,39 @@ namespace Portal
                 tmp.Release();
                 Destroy(tmp);
             }
+        }
+        #endregion
+    }
+
+    [System.Serializable]
+    public class PortalConnection
+    {
+        public Portal portalA;
+        public Portal portalB;
+        public string id;
+
+        public PortalConnection(string id)
+        {
+            this.id = id;
+        }
+
+        public bool Register(Portal portal)
+        {
+            if (portal.type == PortalType.A)
+            {
+                if (portalA == null)
+                    portalA = portal;
+                else
+                    return false;
+            }
+            else
+            {
+                if (portalB == null)
+                    portalB = portal;
+                else
+                    return false;
+            }
+            return true;
         }
     }
 }

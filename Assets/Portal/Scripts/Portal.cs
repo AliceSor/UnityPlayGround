@@ -4,20 +4,41 @@ using UnityEngine;
 
 namespace Portal
 {
+    ///<summary>
+    ///To register the portal couple portal helper must differentiate them, 
+    ///so in each couple must be A and B portal
+    ///</summary>
+    public enum PortalType { A, B }
+
     [RequireComponent(typeof(PortalCamera))]
     [RequireComponent(typeof(PortalTeleporter))]
     public class Portal : MonoBehaviour
     {
-        public Portal secondPortal;
+        public string id;
+        public PortalType type;
+
+        [Space(10)]
+        public PortalHelper helper;
         public Transform teleportPlane;
         public Camera cam;
 
+        private Portal secondPortal;
         private PortalCamera _camera;
         private PortalTeleporter _teleporter;
         private bool _isActive = false;
 
+        private void Awake()
+        {
+            //register to portal helper
+            if (!helper.RegisterPortal(id, this))
+                Destroy(gameObject);
+        }
+
         private void Start()
         {
+            //get second portal from helper
+            secondPortal = helper.GetSecondPortal(this);
+
             if (secondPortal == null)
             {
                 Debug.LogError("Missing second teleport");

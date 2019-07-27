@@ -12,4 +12,6 @@ MonoBehaviour:
   m_Name: PortalHelper
   m_EditorClassIdentifier: 
   originMaterial: {fileID: 2100000, guid: 959c50d8d834c2042a284fd28d7227d6, type: 2}
+  connections: []
   player: {fileID: 0}
+  cameraPlayer: {fileID: 0}
