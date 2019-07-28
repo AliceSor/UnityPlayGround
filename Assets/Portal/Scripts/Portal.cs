@@ -46,6 +46,7 @@ namespace Portal
             }
             _camera = GetComponent<PortalCamera>();
             _teleporter = GetComponent<PortalTeleporter>();
+            _camera.renderPlane.gameObject.SetActive(false);
             Sleep();
             //WakeUp();
         }
