@@ -14,6 +14,7 @@ namespace Portal
         private Camera cam;
         private Transform playerCamera;
         private Transform otherPortal;
+        private RenderTexture _renderTexture;
 
         #region Unity Callback
 
@@ -68,6 +69,7 @@ namespace Portal
 
         public void SetUp(Portal secondPortal)
         {
+            Debug.Log("Setup Camera");
             cam = secondPortal.cam;
             //set render texure
             if (cam.targetTexture != null)
@@ -75,6 +77,7 @@ namespace Portal
                 cam.targetTexture.Release();
             }
             cam.targetTexture = helper.GetRenderTexture();
+            _renderTexture = cam.targetTexture;//we need to release this texture later
 
             //set material
             Material mat = helper.GetMaterial();
@@ -94,12 +97,11 @@ namespace Portal
 
         public void FreeResources()
         {
+            Debug.Log("Free resources");
             //return render texture and material
-            //if (cam.targetTexture != null)
-            //    helper.ReturnRenderTexture(cam.targetTexture);
-            //if (renderPlane.sharedMaterial != null)
-            //    helper.ReturnMaterial(renderPlane.sharedMaterial);
-            //renderPlane.sharedMaterial = null;
+            helper.ReturnRenderTexture(_renderTexture);
+            helper.ReturnMaterial(renderPlane.sharedMaterial);
+            renderPlane.sharedMaterial = null;
         }
     }
 }

@@ -75,10 +75,11 @@ namespace Portal
             if (_skipCooldownCorotine != null)
             {
                 StopCoroutine(_skipCooldownCorotine);
-                //start new
-                _skipCooldownCorotine = StartCoroutine(Cooldown());
             }
+            //start new coroutine
+            _skipCooldownCorotine = StartCoroutine(Cooldown());
         }
+    
 
         private IEnumerator Cooldown()
         {

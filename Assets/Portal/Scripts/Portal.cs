@@ -69,6 +69,7 @@ namespace Portal
         {
             _camera.enabled = false;
             cam.gameObject.SetActive(false);
+            cam.enabled = false;
             _teleporter.enabled = false;
             teleportPlane.gameObject.SetActive(false);
             Debug.Log("Portal sleep");
