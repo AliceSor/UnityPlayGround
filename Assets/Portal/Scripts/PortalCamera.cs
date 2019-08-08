@@ -16,6 +16,8 @@ namespace Portal
         private Transform otherPortal;
         private RenderTexture _renderTexture;
 
+        private bool isSettaped = false;
+
         #region Unity Callback
 
         private void Start()
@@ -45,7 +47,8 @@ namespace Portal
 
         void Update()
         {
-            MoveCamera();
+            if (isSettaped)
+                MoveCamera();
         }
         #endregion
 
@@ -93,6 +96,7 @@ namespace Portal
             //enable cam
             cam.enabled = true;
             cam.gameObject.SetActive(true);
+            isSettaped = true;
         }
 
         public void FreeResources()
@@ -102,6 +106,7 @@ namespace Portal
             helper.ReturnRenderTexture(_renderTexture);
             helper.ReturnMaterial(renderPlane.sharedMaterial);
             renderPlane.sharedMaterial = null;
+            isSettaped = false;
         }
     }
 }

@@ -80,8 +80,12 @@ namespace Portal
             else
             {
                 RenderTexture tmp = _renderTexturePool.Pop();
-                tmp.Create();
-                return tmp;
+                if (tmp != null)
+                {   tmp.Create();
+                    return tmp;
+                }
+                else
+                    return (new RenderTexture(Screen.width, Screen.height, 24));
             }
             
         }
@@ -93,7 +97,8 @@ namespace Portal
 
         public void ReturnRenderTexture(RenderTexture rTexture)
         {
-            rTexture.Release();
+            if (rTexture != null && rTexture.IsCreated())
+                rTexture.Release();
             _renderTexturePool.Push(rTexture);
         }
 
