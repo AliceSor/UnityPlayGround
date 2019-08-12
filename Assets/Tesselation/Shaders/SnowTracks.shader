@@ -44,7 +44,8 @@
 		void disp (inout appdata v)
 		{
 			float d = tex2Dlod(_Splat, float4(v.texcoord.xy,0,0)).r * _Displacement;
-			v.vertex.xyz -= v.normal * d;
+			float clamped_d = saturate(d);
+			v.vertex.xyz -= v.normal * clamped_d;
 			v.vertex.xyz += v.normal * _Displacement;
 		}
 
@@ -72,7 +73,8 @@
 
 		void surf (Input IN, inout SurfaceOutputStandard o) {
 			half amount = tex2Dlod(_Splat, float4(IN.uv_Splat, 0, 0)).r;
-			fixed4 c = lerp(tex2D (_SnowTex, IN.uv_SnowTex) * _SnowColor, tex2D (_GroundTex, IN.uv_GroundTex) * _GroundColor, amount);
+			float clamped_amount = saturate(amount);
+			fixed4 c = lerp(tex2D (_SnowTex, IN.uv_SnowTex) * _SnowColor, tex2D (_GroundTex, IN.uv_GroundTex) * _GroundColor, clamped_amount);
 			// fixed4 c = tex2D (_MainTex, IN.uv_MainTex) * _Color;
 			o.Albedo = c.rgb;
 			// Metallic and smoothness come from slider variables

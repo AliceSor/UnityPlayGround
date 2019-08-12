@@ -47,7 +47,12 @@
 			{
 				// sample the texture
 				fixed4 col = tex2D(_MainTex, i.uv);
-				return col;
+				//Note: saturate = clamp
+				//Looking at the distanse between current texture coordinate (i.uv) and the point that must be red (_Coordinate.xy)
+				//Clamp it to [0, 1] and take pow to increase the size of brush
+				float draw = pow(saturate(1 - distance(i.uv, _Coordinate.xy)), 100);
+				fixed4 drawColor = _Color * (draw * 0.5);
+				return (col + drawColor);
 			}
 			ENDCG
 		}

@@ -249,8 +249,8 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 739382297}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalRotation: {x: -0.009701669, y: 0.9120932, z: -0.40929747, w: -0.021619543}
+  m_LocalPosition: {x: 0.763425, y: 2.4652846, z: 4.6007786}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -266,6 +266,7 @@ GameObject:
   - component: {fileID: 1081268154}
   - component: {fileID: 1081268153}
   - component: {fileID: 1081268152}
+  - component: {fileID: 1081268155}
   - component: {fileID: 1081268151}
   m_Layer: 0
   m_Name: Plane
@@ -343,3 +344,16 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1081268155
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1081268150}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76f191a5c3d82e043bcdfaf295c1dc97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cam: {fileID: 739382299}
+  shader: {fileID: 4800000, guid: aec3912bfd96e4f4b8fb8c432a3e12b9, type: 3}
