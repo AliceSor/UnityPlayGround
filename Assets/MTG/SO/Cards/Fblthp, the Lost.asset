@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d344350c295fffa4b8c8fd64c969b117, type: 3}
+  m_Name: Fblthp, the Lost
+  m_EditorClassIdentifier: 
+  cardName: ' Fblthp, the Lost'
+  manaCost:
+    converted: 2
+    uncolored: 1
+    manaTypes:
+    - {fileID: 11400000, guid: 60cbe222cedc89746baa42ac54d2759c, type: 2}
+  sprite: {fileID: 21300000, guid: 17f9464d7cf40af41913c314b95ea78a, type: 3}
+  type: {fileID: 11400000, guid: 572184be3fb61d340bde3acfb19eb0c4, type: 2}
+  abilityText: When Fblthp, the Lost enters the battlefield, draw a card. If it entered
+    from your library or was cast from your library, draw two cards instead. When
+    Fblthp becomes the target of a spell, shuffle Fblthp into its owner's library.
+  flavor: 
+  power_toughness: {x: 1, y: 1}
+  loyalty: 0

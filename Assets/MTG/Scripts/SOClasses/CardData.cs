@@ -9,6 +9,8 @@ public class CardData : ScriptableObject
     public ManaCost manaCost;
     public Sprite sprite;
     public CardType type;
-
-    public string flawor;
+    public string abilityText;
+    public string flavor;
+    public Vector2 power_toughness;
+    public int loyalty;
 }

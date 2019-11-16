@@ -9,7 +9,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8ea64d50dd8e7dc4fb8dbb4a04ad2165, type: 3}
-  m_Name: Iland
+  m_Name: Island
   m_EditorClassIdentifier: 
-  manaName: Iland
+  manaName: Island
   manaSymbol: +

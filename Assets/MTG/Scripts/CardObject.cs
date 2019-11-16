@@ -12,7 +12,8 @@ public class CardObject : MonoBehaviour
     public TextMeshProUGUI manaCost;
     public Image image;
     public TextMeshProUGUI cardType;
-    public TextMeshProUGUI abilityAndFlawor;
+    public TextMeshProUGUI abilityAndFlavor;
+    public TextMeshProUGUI powerAndToughness;
 
     void Start()
     {
@@ -26,6 +27,20 @@ public class CardObject : MonoBehaviour
         manaCost.text = data.manaCost.ToString();
         image.sprite = data.sprite;
         cardType.text = data.type.typeName;
-        abilityAndFlawor.text = "<i>" + data.flawor + "</i>";
+        abilityAndFlavor.text = data.abilityText;
+        if (data.flavor.Length > 0)
+        {
+            if (data.abilityText.Length > 0)
+                abilityAndFlavor.text += "<br><br>";
+            abilityAndFlavor.text  += "<i>" + data.flavor + "</i>";
+        }
+        if (data.type.typeName == "Creature")
+        {
+            powerAndToughness.text = data.power_toughness.x.ToString() + "/" + data.power_toughness.y.ToString();
+        }
+        else if (data.type.typeName == "Planswalker")
+        {
+            powerAndToughness.text = data.loyalty.ToString();
+        }
     }
 }

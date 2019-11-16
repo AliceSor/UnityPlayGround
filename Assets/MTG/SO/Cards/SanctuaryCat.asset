@@ -19,5 +19,8 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 4e084def531e92a479ce170493b195fd, type: 2}
   sprite: {fileID: 21300000, guid: 9da8f1ba9bc3b4b4a8f2cfdcb934995a, type: 3}
   type: {fileID: 11400000, guid: 572184be3fb61d340bde3acfb19eb0c4, type: 2}
-  flawor: Cats prowl the corridors of Avacyn's churches in search of devils or signs
+  abilityText: 
+  flavor: Cats prowl the corridors of Avacyn's churches in search of devils or signs
     of their mischief.
+  power_toughness: {x: 1, y: 2}
+  loyalty: 0
